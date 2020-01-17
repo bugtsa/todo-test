@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Todoshka</string>
+    <string name="status_caption">Status</string>
+    <string name="title_caption">Title</string>
+</resources>
