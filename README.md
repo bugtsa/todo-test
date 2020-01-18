@@ -1,4 +1,4 @@
-##Technogies in that project
+## Technogies in that project
 - Clean Architecture (data, domain, presentation layers)
 - Android Architecture Components (ViewModel, LiveData)
 - Koin as DI container
