@@ -1,23 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.main.MainFragment">
 
+    <FrameLayout
+        android:id="@+id/vCaptions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primaryDarkColor"
+        app:layout_constraintBottom_toTopOf="@+id/vTodoList"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include layout="@layout/item_todo" />
+    </FrameLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/vTodoList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
+        android:background="@color/primaryLightColor"
         android:clipChildren="false"
         android:padding="@dimen/spacing_x_small_4"
-        app:layout_constraintTop_toTopOf="parent"
+        android:scrollbars="none"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:scrollbars="none" />
+        app:layout_constraintTop_toBottomOf="@+id/vCaptions" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

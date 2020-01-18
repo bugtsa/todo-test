@@ -1,5 +1,6 @@
 package com.bugtsa.todo.ui.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,11 +11,14 @@ import com.bugtsa.todo.utils.autoNotify
 import kotlinx.android.synthetic.main.item_todo.view.*
 import kotlin.properties.Delegates
 
-class TodoAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<TodoAdapter.ViewHolder>() {
+class TodoAdapter(private val context: Context) :
+    androidx.recyclerview.widget.RecyclerView.Adapter<TodoAdapter.ViewHolder>() {
 
-    private var todoList: List<TodoDto> by Delegates.observable(initialValue = listOf(), onChange = { property, oldValue, newValue ->
-        autoNotify(oldValue, newValue)
-    })
+    private var todoList: List<TodoDto> by Delegates.observable(
+        initialValue = listOf(),
+        onChange = { _, oldValue, newValue ->
+            autoNotify(oldValue, newValue)
+        })
 
     //region ================= Implements Methods =================
 
@@ -22,7 +26,11 @@ class TodoAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<TodoAdapte
 
         val todoItem: TodoDto = todoList[position]
         holder.title.text = todoItem.title
-        holder.status.text = if (todoItem.completed) "SUCCESS" else "PROGRESS"
+        holder.status.text = if (todoItem.completed) {
+            context.getString(R.string.completed_status)
+        } else {
+            context.getString(R.string.not_completed_status)
+        }
     }
 
     override fun getItemCount(): Int {

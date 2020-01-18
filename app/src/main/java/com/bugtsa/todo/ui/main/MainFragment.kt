@@ -39,7 +39,7 @@ class MainFragment : Fragment() {
 
     private fun bindView() {
         recyclerView = vTodoList
-        todoAdapter = TodoAdapter()
+        todoAdapter = TodoAdapter(requireContext())
 
         val mLayoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         vTodoList.layoutManager = mLayoutManager

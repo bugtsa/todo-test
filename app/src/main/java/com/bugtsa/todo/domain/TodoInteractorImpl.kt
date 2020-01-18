@@ -8,11 +8,10 @@ import io.reactivex.Single
 import io.reactivex.functions.BiFunction
 import timber.log.Timber
 
-class TodoWorkerInteractorImpl(
+class TodoInteractorImpl(
     private val networkRepository: NetworkRepository,
     private val storageRepository: StorageRepository
-) :
-    TodoWorkerInteractor {
+) : TodoInteractor {
 
     override fun observeTodosList(): Single<List<TodoDto>> {
         return networkRepository.isAvailableNetwork()
