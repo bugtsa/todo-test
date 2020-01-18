@@ -1,7 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
     <string name="app_name">Todoshka</string>
-    <string name="status_caption">Status</string>
-    <string name="title_caption">Title</string>
+
+    <string name="check_internet">Please, check internet connection</string>
+
     <string name="completed_status">Completed</string>
+
     <string name="not_completed_status">Not Completed</string>
+
+    <string name="status_caption">Status</string>
+
+    <string name="title_caption">Title</string>
 </resources>

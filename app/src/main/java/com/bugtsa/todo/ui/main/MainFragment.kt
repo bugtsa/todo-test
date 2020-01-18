@@ -58,7 +58,16 @@ class MainFragment : Fragment() {
 
     private fun bindViewModel() {
         viewModel.observeTodosList().observe(viewLifecycleOwner, Observer {
+            vTodoList.visibility = View.VISIBLE
+            vCheckInternet.visibility = View.GONE
             todoAdapter?.setItems(it)
+        })
+        viewModel.observeProgressState().observe(viewLifecycleOwner, Observer { visibleState ->
+            vProgressBar.visibility = visibleState
+        })
+        viewModel.observeCheckInternet().observe(viewLifecycleOwner, Observer {
+            vTodoList.visibility = View.GONE
+            vCheckInternet.visibility = View.VISIBLE
         })
     }
 
