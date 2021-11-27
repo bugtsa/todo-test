@@ -1,8 +1,8 @@
-package com.bugtsa.todo.data.entities
+package com.bugtsa.todo.data.model.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.bugtsa.todo.data.dto.TodoDto
+import com.bugtsa.todo.domain.model.TodoDto
 
 @Entity(tableName = "todo")
 class TodoEntity(

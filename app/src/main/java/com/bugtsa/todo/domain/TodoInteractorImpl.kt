@@ -1,11 +1,12 @@
 package com.bugtsa.todo.domain
 
-import com.bugtsa.todo.data.dto.TodoDto
-import com.bugtsa.todo.data.repos.NetworkRepository
-import com.bugtsa.todo.data.repos.StorageRepository
+import com.bugtsa.todo.domain.MapperState.fromState
+import com.bugtsa.todo.domain.MapperState.toState
+import com.bugtsa.todo.domain.repos.NetworkRepository
+import com.bugtsa.todo.domain.repos.StorageRepository
+import com.bugtsa.todo.domain.model.DataState
 import io.reactivex.Completable
 import io.reactivex.Single
-import io.reactivex.functions.BiFunction
 
 class TodoInteractorImpl(
     private val networkRepository: NetworkRepository,
@@ -21,7 +22,7 @@ class TodoInteractorImpl(
                     storageRepository.observeTodoList()
                         .map { todoList ->
                             if (todoList.isNotEmpty()) {
-                                DataState.OfflineFilledList(todoList)
+                                DataState.OfflineFilledList(todoList.map { it.toState() })
                             } else {
                                 DataState.OfflineEmptyList
                             }
@@ -31,7 +32,7 @@ class TodoInteractorImpl(
             .flatMap { dataState ->
                 val completable = when {
                     dataState is DataState.OnlineFilledList && dataState.isEmptyStorage -> {
-                        storageRepository.saveTodoList(dataState.list)
+                        storageRepository.saveTodoList(dataState.list.map { it.fromState() })
                             .flatMapCompletable { Completable.complete() }
                     }
                     else -> Completable.complete()
@@ -43,18 +44,9 @@ class TodoInteractorImpl(
 
     private fun observeNetworkTodoList(): Single<DataState.OnlineFilledList> {
         return Single.zip(networkRepository.observeTodosList(),
-            storageRepository.isEmptyTodoList(),
-            BiFunction { list, isEmptyStorage ->
-                DataState.OnlineFilledList(list, isEmptyStorage)
-            })
+            storageRepository.isEmptyTodoList()
+        ) { list, isEmptyStorage ->
+            DataState.OnlineFilledList(list.map { it.toState() }, isEmptyStorage)
+        }
     }
-}
-
-sealed class DataState {
-    object OfflineEmptyList : DataState()
-    data class OfflineFilledList(val list: List<TodoDto>) : DataState()
-    data class OnlineFilledList(
-        val list: List<TodoDto>,
-        val isEmptyStorage: Boolean
-    ) : DataState()
 }

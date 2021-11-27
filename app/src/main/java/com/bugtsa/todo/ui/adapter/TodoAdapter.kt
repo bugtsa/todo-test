@@ -6,7 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.bugtsa.todo.R
-import com.bugtsa.todo.data.dto.TodoDto
+import com.bugtsa.todo.domain.model.TodoDto
+import com.bugtsa.todo.ui.models.TodoState
 import com.bugtsa.todo.utils.autoNotify
 import kotlinx.android.synthetic.main.item_todo.view.*
 import kotlin.properties.Delegates
@@ -14,7 +15,7 @@ import kotlin.properties.Delegates
 class TodoAdapter(private val context: Context) :
     androidx.recyclerview.widget.RecyclerView.Adapter<TodoAdapter.ViewHolder>() {
 
-    private var todoList: List<TodoDto> by Delegates.observable(
+    private var todoList: List<TodoState> by Delegates.observable(
         initialValue = listOf(),
         onChange = { _, oldValue, newValue ->
             autoNotify(oldValue, newValue)
@@ -24,7 +25,7 @@ class TodoAdapter(private val context: Context) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val todoItem: TodoDto = todoList[position]
+        val todoItem: TodoState = todoList[position]
         holder.title.text = todoItem.title
         holder.status.text = if (todoItem.completed) {
             context.getString(R.string.completed_status)
@@ -47,7 +48,7 @@ class TodoAdapter(private val context: Context) :
 
     //endregion
 
-    fun setItems(itemList: List<TodoDto>) {
+    fun setItems(itemList: List<TodoState>) {
         this.todoList = itemList
     }
 

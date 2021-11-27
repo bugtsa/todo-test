@@ -1,4 +1,4 @@
-package com.bugtsa.todo.data.entities
+package com.bugtsa.todo.data.model.entities
 
 import androidx.room.Dao
 import androidx.room.Insert

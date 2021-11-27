@@ -1,4 +1,4 @@
-package com.bugtsa.todo.data.remote
+package com.bugtsa.todo.data.model.remote
 
 import com.squareup.moshi.Json
 

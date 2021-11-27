@@ -1,8 +1,8 @@
 package com.bugtsa.todo.domain
 
-import com.bugtsa.todo.data.dto.TodoDto
-import com.bugtsa.todo.data.repos.NetworkRepository
-import com.bugtsa.todo.data.repos.StorageRepository
+import com.bugtsa.todo.domain.model.TodoDto
+import com.bugtsa.todo.domain.repos.NetworkRepository
+import com.bugtsa.todo.domain.repos.StorageRepository
 import com.bugtsa.todo.global.rx.SchedulersProvider
 import io.mockk.*
 import io.reactivex.Single

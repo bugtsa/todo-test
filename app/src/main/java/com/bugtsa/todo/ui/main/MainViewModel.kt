@@ -3,17 +3,18 @@ package com.bugtsa.todo.ui.main
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.bugtsa.todo.data.dto.TodoDto
-import com.bugtsa.todo.domain.DataState
+import com.bugtsa.todo.domain.model.TodoDto
 import com.bugtsa.todo.domain.TodoInteractor
+import com.bugtsa.todo.domain.model.DataState
 import com.bugtsa.todo.global.ErrorHandler
 import com.bugtsa.todo.global.rx.SchedulersProvider
 import com.bugtsa.todo.presentation.RxViewModel
+import com.bugtsa.todo.ui.models.TodoState
 
 class MainViewModel(todoInteractor: TodoInteractor) : RxViewModel() {
 
-    private val todosListLiveData = MutableLiveData<List<TodoDto>>()
-    fun observeTodosList(): LiveData<List<TodoDto>> = todosListLiveData
+    private val todosListLiveData = MutableLiveData<List<TodoState>>()
+    fun observeTodosList(): LiveData<List<TodoState>> = todosListLiveData
 
     private val progressStateLiveData = MutableLiveData<Int>()
     fun observeProgressState(): LiveData<Int> = progressStateLiveData

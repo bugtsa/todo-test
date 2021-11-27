@@ -1,7 +1,6 @@
 package com.bugtsa.todo.network
 
-import com.bugtsa.todo.data.remote.TodoRes
-import io.reactivex.Flowable
+import com.bugtsa.todo.data.model.remote.TodoRes
 import io.reactivex.Single
 import retrofit2.http.GET
 

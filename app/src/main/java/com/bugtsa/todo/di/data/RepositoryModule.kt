@@ -1,8 +1,8 @@
 package com.bugtsa.todo.di.data
 
-import com.bugtsa.todo.data.repos.NetworkRepository
+import com.bugtsa.todo.domain.repos.NetworkRepository
 import com.bugtsa.todo.data.repos.NetworkRepositoryImpl
-import com.bugtsa.todo.data.repos.StorageRepository
+import com.bugtsa.todo.domain.repos.StorageRepository
 import com.bugtsa.todo.data.repos.StorageRepositoryImpl
 import com.bugtsa.todo.network.utils.connectivity.ConnectivityChecker
 import com.bugtsa.todo.network.utils.connectivity.ConnectivityCheckerImpl

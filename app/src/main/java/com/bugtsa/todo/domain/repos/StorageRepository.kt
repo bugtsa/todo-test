@@ -1,6 +1,6 @@
-package com.bugtsa.todo.data.repos
+package com.bugtsa.todo.domain.repos
 
-import com.bugtsa.todo.data.dto.TodoDto
+import com.bugtsa.todo.domain.model.TodoDto
 import io.reactivex.Single
 
 interface StorageRepository {

@@ -1,8 +1,6 @@
-package com.bugtsa.todo.data.repos
+package com.bugtsa.todo.domain.repos
 
-import com.bugtsa.todo.data.dto.TodoDto
-import io.reactivex.Flowable
-import io.reactivex.Observable
+import com.bugtsa.todo.domain.model.TodoDto
 import io.reactivex.Single
 
 interface NetworkRepository {

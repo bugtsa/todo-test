@@ -1,10 +1,10 @@
 package com.bugtsa.todo.data.repos
 
-import com.bugtsa.todo.data.dto.TodoDto
+import com.bugtsa.todo.domain.MapperDto
+import com.bugtsa.todo.domain.model.TodoDto
+import com.bugtsa.todo.domain.repos.NetworkRepository
 import com.bugtsa.todo.network.TodoHttpHttpClientImpl
 import com.bugtsa.todo.network.utils.connectivity.ConnectivityCheckerImpl
-import io.reactivex.Flowable
-import io.reactivex.Observable
 import io.reactivex.Single
 
 class NetworkRepositoryImpl(
@@ -15,7 +15,7 @@ class NetworkRepositoryImpl(
 
     override fun observeTodosList(): Single<List<TodoDto>> {
         return todosClientImpl.get().requestTodo()
-            .map { list -> list.map { TodoDto.remoteCreate(it) } }
+            .map { list -> list.map { MapperDto.remoteCreate(it) } }
     }
 
     override fun isAvailableNetwork(): Single<Boolean> {

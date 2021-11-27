@@ -6,7 +6,7 @@ import io.reactivex.schedulers.Schedulers as RxSchedulers
 
 object SchedulersProvider : SchedulersContract {
 
-    override fun ui() = AndroidSchedulers.mainThread()
+    override fun ui(): Scheduler = AndroidSchedulers.mainThread()
     override fun trampoline() = RxSchedulers.trampoline()
     override fun io() = RxSchedulers.io()
 }

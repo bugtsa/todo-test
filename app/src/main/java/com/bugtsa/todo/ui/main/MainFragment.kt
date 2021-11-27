@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,9 +29,8 @@ class MainFragment : Fragment() {
         return inflater.inflate(R.layout.main_fragment, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         bindView()
         bindViewModel()
     }
@@ -57,18 +55,18 @@ class MainFragment : Fragment() {
     }
 
     private fun bindViewModel() {
-        viewModel.observeTodosList().observe(viewLifecycleOwner, Observer {
+        viewModel.observeTodosList().observe(viewLifecycleOwner) {
             vTodoList.visibility = View.VISIBLE
             vCheckInternet.visibility = View.GONE
             todoAdapter?.setItems(it)
-        })
-        viewModel.observeProgressState().observe(viewLifecycleOwner, Observer { visibleState ->
+        }
+        viewModel.observeProgressState().observe(viewLifecycleOwner) { visibleState ->
             vProgressBar.visibility = visibleState
-        })
-        viewModel.observeCheckInternet().observe(viewLifecycleOwner, Observer {
+        }
+        viewModel.observeCheckInternet().observe(viewLifecycleOwner) {
             vTodoList.visibility = View.GONE
             vCheckInternet.visibility = View.VISIBLE
-        })
+        }
     }
 
     companion object {
