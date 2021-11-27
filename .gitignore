@@ -72,3 +72,8 @@ lint/generated/
 lint/outputs/
 lint/tmp/
 # lint/reports/
+/.idea/compiler.xml
+/.idea/deploymentTargetDropDown.xml
+/.idea/jarRepositories.xml
+/.idea/misc.xml
+/.idea/codeStyles/Project.xml
