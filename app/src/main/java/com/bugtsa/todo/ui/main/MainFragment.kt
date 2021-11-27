@@ -10,24 +10,20 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bugtsa.todo.R
+import com.bugtsa.todo.databinding.MainFragmentBinding
 import com.bugtsa.todo.ui.adapter.SpacesItemDecoration
 import com.bugtsa.todo.ui.adapter.TodoAdapter
-import kotlinx.android.synthetic.main.main_fragment.*
+import com.bugtsa.todo.utils.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainFragment : Fragment() {
+class MainFragment : Fragment(R.layout.main_fragment) {
 
     private var todoAdapter: TodoAdapter? = null
     private lateinit var recyclerView: RecyclerView
 
     private val viewModel by viewModel<MainViewModel>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return inflater.inflate(R.layout.main_fragment, container, false)
-    }
+    private val binding by viewBinding(MainFragmentBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -36,11 +32,11 @@ class MainFragment : Fragment() {
     }
 
     private fun bindView() {
-        recyclerView = vTodoList
+        recyclerView = binding.vTodoList
         todoAdapter = TodoAdapter(requireContext())
 
         val mLayoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        vTodoList.layoutManager = mLayoutManager
+        binding.vTodoList.layoutManager = mLayoutManager
         recyclerView.itemAnimator = DefaultItemAnimator()
         val space = TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP, 8f,
@@ -56,16 +52,16 @@ class MainFragment : Fragment() {
 
     private fun bindViewModel() {
         viewModel.observeTodosList().observe(viewLifecycleOwner) {
-            vTodoList.visibility = View.VISIBLE
-            vCheckInternet.visibility = View.GONE
+            binding.vTodoList.visibility = View.VISIBLE
+            binding.vCheckInternet.visibility = View.GONE
             todoAdapter?.setItems(it)
         }
         viewModel.observeProgressState().observe(viewLifecycleOwner) { visibleState ->
-            vProgressBar.visibility = visibleState
+            binding.vProgressBar.visibility = visibleState
         }
         viewModel.observeCheckInternet().observe(viewLifecycleOwner) {
-            vTodoList.visibility = View.GONE
-            vCheckInternet.visibility = View.VISIBLE
+            binding.vTodoList.visibility = View.GONE
+            binding.vCheckInternet.visibility = View.VISIBLE
         }
     }
 

@@ -6,10 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.bugtsa.todo.R
-import com.bugtsa.todo.domain.model.TodoDto
 import com.bugtsa.todo.ui.models.TodoState
 import com.bugtsa.todo.utils.autoNotify
-import kotlinx.android.synthetic.main.item_todo.view.*
 import kotlin.properties.Delegates
 
 class TodoAdapter(private val context: Context) :
@@ -55,8 +53,8 @@ class TodoAdapter(private val context: Context) :
     //region ================= View Holder =================
 
     class ViewHolder(item: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(item) {
-        var title: TextView = item.title_todo
-        var status: TextView = item.status_todo
+        var title: TextView = item.findViewById(R.id.title_todo)
+        var status: TextView = item.findViewById(R.id.status_todo)
     }
 
     //endregion

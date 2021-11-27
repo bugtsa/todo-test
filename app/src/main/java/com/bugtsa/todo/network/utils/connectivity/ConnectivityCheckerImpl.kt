@@ -7,7 +7,6 @@ import com.jakewharton.rxrelay2.BehaviorRelay
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.Observable
 import io.reactivex.Single
-import io.reactivex.functions.BiFunction
 import io.reactivex.observables.ConnectableObservable
 import io.reactivex.schedulers.Schedulers
 
@@ -26,14 +25,14 @@ class ConnectivityCheckerImpl(context: Context) : ConnectivityChecker {
 
         connectionState = Observable.combineLatest(
                 internet,
-                channelReadyConsumer,
-                BiFunction<Boolean, Boolean, ConnectionState> { isNetworkConnected, isChannelReady ->
-                    when {
-                        !isNetworkConnected -> ConnectionState.DISCONNECTED
-                        isChannelReady -> ConnectionState.CONNECTED
-                        else -> ConnectionState.CONNECTING
-                    }
-                }).replay()
+                channelReadyConsumer
+        ) { isNetworkConnected, isChannelReady ->
+            when {
+                !isNetworkConnected -> ConnectionState.DISCONNECTED
+                isChannelReady -> ConnectionState.CONNECTED
+                else -> ConnectionState.CONNECTING
+            }
+        }.replay()
         connectionState.connect()
     }
 
